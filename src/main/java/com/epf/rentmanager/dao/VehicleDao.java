@@ -19,21 +19,26 @@ public class VehicleDao {
 		return instance;
 	}
 	
-	private static final String CREATE_VEHICLE_QUERY = "INSERT INTO Vehicle(constructeur, nb_places) VALUES(?, ?);";
-	private static final String DELETE_VEHICLE_QUERY = "DELETE FROM Vehicle WHERE id=?;";
-	private static final String FIND_VEHICLE_QUERY = "SELECT id, constructeur, nb_places FROM Vehicle WHERE id=?;";
-	private static final String FIND_VEHICLES_QUERY = "SELECT id, constructeur, nb_places FROM Vehicle;";
-	
+	private static final String CREATE_VEHICLE_QUERY = "INSERT INTO VEHICLE(constructeur, modele, nb_places) VALUES(?, ?, ?);";
+
+	private static final String DELETE_VEHICLE_QUERY = "DELETE FROM VEHICLE WHERE id=?;";
+	private static final String FIND_VEHICLE_QUERY = "SELECT id, constructeur, modele, nb_places FROM VEHICLE WHERE id=?;";
+	private static final String FIND_VEHICLES_QUERY = "SELECT id, constructeur, modele, nb_places FROM VEHICLE;";
+	private static final String COUNT_VEHICLES_QUERY = "SELECT COUNT(id) AS count FROM VEHICLE;";
+
+
 	public long create(Vehicle vehicle) throws DaoException {
 		try {
 			Connection connection = ConnectionManager.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(CREATE_VEHICLE_QUERY);
 			preparedStatement.setString(1, vehicle.getConstructeur());
-			preparedStatement.setInt(2, vehicle.getNbPlaces());
+			preparedStatement.setString(2, vehicle.getModele());
+			preparedStatement.setInt(3, vehicle.getNbPlaces());
 			preparedStatement.execute();
-			connection.close();
+
 			return 1;
 		} catch (SQLException error){
+			error.printStackTrace();
 			return 0;
 		}
 	}
@@ -46,76 +51,86 @@ public class VehicleDao {
 			preparedStatement.setInt(1, vehicle.getId()); // ATTENTION /!\ : l’indice commence par 1, contrairement aux tableaux
 			preparedStatement.execute();
 
-			connection.close();
+
 			return 1;
 		} catch (SQLException error){
+			error.printStackTrace();
 			return 0;
 		}
 	}
 
 	public Vehicle findById(long id) throws DaoException {
 		try {
-			Connection connection = ConnectionManager.getConnection();
-			PreparedStatement preparedStatement = connection.prepareStatement(FIND_VEHICLE_QUERY) ;
-
-			// Set the value for the placeholder
-			preparedStatement.setInt(1, (int) id);
-
-			// Execute the query
-			ResultSet resultSet = preparedStatement.executeQuery();
-
-			// Process the result set
-			if (resultSet.next()) {
-				// Retrieve values from the result set
-
-
-				// Create a Client object with the retrieved values
-				Vehicle vehicle;
-				vehicle = new Vehicle((int) id, resultSet.getString("constructeur"), resultSet.getString("modele"), resultSet.getByte("nb_place"));
-				return vehicle;
+			Connection connexion = ConnectionManager.getConnection();
+			PreparedStatement preparedStatement = connexion.prepareStatement(FIND_VEHICLE_QUERY);
+			preparedStatement.setLong(1, id);
+			preparedStatement.execute();
+			ResultSet result = preparedStatement.getResultSet();
+			if (result.next()) {
+				return new Vehicle(result.getInt("id"), result.getString("constructeur"), result.getString
+						("modele"), result.getInt("nb_places"));
+			} else {
+				System.out.println("Aucun véhicule ne possède cet identifiant !");
+				return null;
 			}
 		} catch (SQLException error) {
-			// Handle any SQL exceptions
 			error.printStackTrace();
-			// You may want to handle or log the exception more appropriately in a real application
+			return null;
 		}
-		return null;
 	}
 
 	public List<Vehicle> findAll() throws DaoException {
-		List<Vehicle> vehicles = new ArrayList<>();
 
 		try {
 			Connection connection = ConnectionManager.getConnection();
 
 			// Utilize a Statement for the select query
-			PreparedStatement preparedStatement = connection.prepareStatement(FIND_VEHICLES_QUERY) ;
+			PreparedStatement preparedStatement = connection.prepareStatement(FIND_VEHICLES_QUERY);
+			preparedStatement.execute();
 
-			ResultSet resultSet = preparedStatement.executeQuery();
-
-			// Process the result set and create Client objects
-			while (resultSet.next()) {
-				int id = resultSet.getInt("id");
-				String constructeur = resultSet.getString("constructeur");
-				String modele = resultSet.getString("modele");
-				byte nb_places = resultSet.getByte("nb_places");
-
+			ArrayList<Vehicle> vehicles = new ArrayList<>();
+			ResultSet result = preparedStatement.getResultSet();
+			while (result.next()) {
+				int id = result.getInt("id");
+				String constructeur = result.getString("constructeur");
+				String modele = result.getString("modele");
+				int nb_places = result.getInt("nb_places");
 				// Create a Client object
 				Vehicle vehicle = new Vehicle(id, constructeur, modele, nb_places);
 				// Add the client to the list
 				vehicles.add(vehicle);
 			}
-
-			connection.close();
+			return vehicles;
 		} catch (SQLException error) {
-			// Log the error
-			error.printStackTrace(); // You should use a logger here
-
+			error.printStackTrace();
+			return null;
 		}
 
-		return vehicles;
 		
 	}
-	
+
+	public int count() throws DaoException{
+        int count = 0;
+		try {
+			Connection connection = ConnectionManager.getConnection();
+
+			// Utilize a Statement for the select query
+			PreparedStatement preparedStatement = connection.prepareStatement(COUNT_VEHICLES_QUERY);
+			preparedStatement.execute();
+
+			ResultSet resultSet = preparedStatement.getResultSet();
+
+			// Retrieve the count value from the result set
+			if (resultSet.next()) {
+				count = resultSet.getInt("count");
+			}
+			return count;
+
+		} catch (SQLException error) {
+			error.printStackTrace();
+			return count;
+		}
+
+	}
 
 }

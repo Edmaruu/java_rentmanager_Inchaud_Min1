@@ -12,5 +12,7 @@ C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\model\Vehicle.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\dao\ReservationDao.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlet\HomeServlet.java
+C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlet\VehicleCreateServlet.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\exception\ServiceException.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\dao\VehicleDao.java
+C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\cli\cli.java

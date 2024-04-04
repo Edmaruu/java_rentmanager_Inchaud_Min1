@@ -38,13 +38,14 @@ public class ClientDao {
 			preparedStatement.setString(2, client.getPrenom()); // ATTENTION /!\ : l’indice commence par 1, contrairement aux tableaux
 			preparedStatement.setString(3, client.getEmail()); // ATTENTION /!\ : l’indice commence par 1, contrairement aux tableaux
 			Date date = Date.valueOf(client.getNaissance());
-			preparedStatement.setDate(3, date);
+			preparedStatement.setDate(4, date);
 
 			preparedStatement.execute();
 			connection.close();
 
 			return 1;
 		} catch (SQLException error){
+			error.printStackTrace();
 			return 0;
 		}
 	}
@@ -62,6 +63,7 @@ public class ClientDao {
 			connection.close();
 			return 1;
 		} catch (SQLException error){
+			error.printStackTrace();
 			return 0;
 		}
 	}

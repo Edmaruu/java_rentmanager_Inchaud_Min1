@@ -34,6 +34,16 @@ public class VehicleService {
 		}
 	}
 
+	public long delete(Vehicle vehicle) throws ServiceException {
+
+			try {
+				return vehicleDao.delete(vehicle);
+			} catch (DaoException e) {
+				throw new ServiceException(e);
+			}
+	}
+
+
 	public Vehicle findById(long id) throws ServiceException {
 		// TODO: récupérer un véhicule par son id
 		try {
@@ -47,6 +57,14 @@ public class VehicleService {
 		// TODO: récupérer tous les clients
 		try {
 			return vehicleDao.findAll();
+		} catch (DaoException e) {
+			throw new ServiceException("Erreur lors de la création ou de la mise à jour du client.", e);
+		}
+	}
+
+	public int count() throws ServiceException {
+		try {
+			return vehicleDao.count();
 		} catch (DaoException e) {
 			throw new ServiceException("Erreur lors de la création ou de la mise à jour du client.", e);
 		}

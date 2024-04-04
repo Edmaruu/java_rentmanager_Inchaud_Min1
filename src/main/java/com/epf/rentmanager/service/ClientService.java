@@ -43,6 +43,14 @@ public class ClientService {
 		}
 	}
 
+	public long delete(Client client) throws ServiceException {
+			try {
+				return clientDao.delete(client);
+			} catch (DaoException e) {
+				throw new ServiceException(e);
+			}
+	}
+
 	public List<Client> findAll() throws ServiceException {
 		// TODO: récupérer tous les clients
 		try {

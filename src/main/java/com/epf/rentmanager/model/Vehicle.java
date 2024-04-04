@@ -4,9 +4,9 @@ public class Vehicle {
     private int id;
     public String constructeur;
     public String modele;
-    public byte nb_places;
+    public int nb_places;
 
-    public Vehicle(int id, String constructeur, String modele, byte nb_places) {
+    public Vehicle(int id, String constructeur, String modele, int nb_places) {
         this.id = id;
         this.constructeur = constructeur;
         this.modele = modele;
@@ -26,7 +26,7 @@ public class Vehicle {
         return modele;
     }
 
-    public byte getNbPlaces() {
+    public int getNbPlaces() {
         return nb_places;
     }
 
@@ -43,7 +43,7 @@ public class Vehicle {
         this.modele = modele;
     }
 
-    public void setNbPlaces(byte nb_places) {
+    public void setNbPlaces(int nb_places) {
         this.nb_places = nb_places;
     }
     @Override
