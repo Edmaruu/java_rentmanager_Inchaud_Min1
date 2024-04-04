@@ -50,7 +50,7 @@ public class VehicleCreateServlet extends HttpServlet{
         } catch (Exception e) {
             // Gestion des exceptions
             e.printStackTrace(); // À adapter selon votre gestion d'erreurs
-            response.sendRedirect("erreur.jsp"); // Remplacez "erreur.jsp" par la page que vous souhaitez afficher en cas d'échec
+            response.sendRedirect(request.getContextPath()+"/cars");
         }
     }
 
