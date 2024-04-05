@@ -40,7 +40,7 @@ public class VehicleService {
 	}
 
 
-	public Vehicle findById(long id) throws ServiceException {
+	public Vehicle findById(int id) throws ServiceException {
 		// TODO: récupérer un véhicule par son id
 		try {
 			return vehicleDao.findById(id);

@@ -50,6 +50,7 @@ public class VehicleCreateServlet extends HttpServlet{
             int nb_places = Integer.parseInt(request.getParameter("seats"));
             // Création de l'objet Vehicle
             int countvoiture = vehicleService.count();
+
             Vehicle vehicle = new Vehicle(countvoiture,constructeur, modele, nb_places);
 
             vehicleService.create(vehicle);

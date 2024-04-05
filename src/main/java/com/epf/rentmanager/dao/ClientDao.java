@@ -23,8 +23,9 @@ public class ClientDao {
 	
 	private static final String CREATE_CLIENT_QUERY = "INSERT INTO Client(nom, prenom, email, naissance) VALUES(?, ?, ?, ?);";
 	private static final String DELETE_CLIENT_QUERY = "DELETE FROM Client WHERE id=?;";
-	private static final String FIND_CLIENT_QUERY = "SELECT nom, prenom, email, naissance FROM Client WHERE id=?;";
+	private static final String FIND_CLIENT_QUERY = "SELECT id, nom, prenom, email, naissance FROM Client WHERE id=?;";
 	private static final String FIND_CLIENTS_QUERY = "SELECT id, nom, prenom, email, naissance FROM Client;";
+	private static final String COUNT_CLIENTS_QUERY = "SELECT COUNT(id) AS count FROM CLIENT;";
 	
 	public long create(Client client) throws DaoException {
 		try {
@@ -38,7 +39,7 @@ public class ClientDao {
 			preparedStatement.setDate(4, date);
 
 			preparedStatement.execute();
-			connection.close();
+
 
 			return 1;
 		} catch (SQLException error){
@@ -57,7 +58,7 @@ public class ClientDao {
 			preparedStatement.setInt(1, client.getId()); // ATTENTION /!\ : l’indice commence par 1, contrairement aux tableaux
 			preparedStatement.execute();
 
-			connection.close();
+
 			return 1;
 		} catch (SQLException error){
 			error.printStackTrace();
@@ -65,45 +66,39 @@ public class ClientDao {
 		}
 	}
 
-	public Client findById(long id) throws DaoException {
+	public Client findById(int id) throws DaoException {
+
 		try {
-			Connection connection = ConnectionManager.getConnection();
-			PreparedStatement preparedStatement = connection.prepareStatement(FIND_CLIENT_QUERY) ;
-
-			// Set the value for the placeholder
-			preparedStatement.setInt(1, (int) id);
-
-			// Execute the query
-			ResultSet resultSet = preparedStatement.executeQuery();
-
-			// Process the result set
-			if (resultSet.next()) {
-				// Retrieve values from the result set
-
-
-				// Create a Client object with the retrieved values
-				Client client;
-                client = new Client((int) id, resultSet.getString("nom"), resultSet.getString("prenom"), resultSet.getString("email"), resultSet.getDate("naissance").toLocalDate());
-                return client;
+			Connection connexion = ConnectionManager.getConnection();
+			PreparedStatement preparedStatement = connexion.prepareStatement(FIND_CLIENT_QUERY);
+			preparedStatement.setInt(1, id);
+			preparedStatement.execute();
+			ResultSet result = preparedStatement.getResultSet();
+			if (result.next()) {
+				return new Client(result.getInt("id"), result.getString("nom"), result.getString("prenom"), result.getString("email"), result.getDate("naissance").toLocalDate());
+			} else {
+				System.out.println("Aucun client ne possède cet identifiant !");
+				return null;
 			}
 		} catch (SQLException error) {
-			// Handle any SQL exceptions
 			error.printStackTrace();
-			// You may want to handle or log the exception more appropriately in a real application
+			return null;
 		}
-		return null;
+
 	}
 
 	public List<Client> findAll() throws DaoException {
-		List<Client> clients = new ArrayList<>();
+
 
 		try {
 			Connection connection = ConnectionManager.getConnection();
 
 			// Utilize a Statement for the select query
 			PreparedStatement preparedStatement = connection.prepareStatement(FIND_CLIENTS_QUERY) ;
+			preparedStatement.execute();
 
-			ResultSet resultSet = preparedStatement.executeQuery();
+			ArrayList<Client> clients = new ArrayList<>();
+			ResultSet resultSet = preparedStatement.getResultSet();
 
 			// Process the result set and create Client objects
 			while (resultSet.next()) {
@@ -119,14 +114,37 @@ public class ClientDao {
 				clients.add(client);
 			}
 
-			connection.close();
+			return clients;
 		} catch (SQLException error) {
 			// Log the error
 			error.printStackTrace(); // You should use a logger here
-
+			return null;
 		}
 
-		return clients;
+
+	}
+	public int count() throws DaoException{
+		int count = 0;
+		try {
+			Connection connection = ConnectionManager.getConnection();
+
+			// Utilize a Statement for the select query
+			PreparedStatement preparedStatement = connection.prepareStatement(COUNT_CLIENTS_QUERY);
+			preparedStatement.execute();
+
+			ResultSet resultSet = preparedStatement.getResultSet();
+
+			// Retrieve the count value from the result set
+			if (resultSet.next()) {
+				count = resultSet.getInt("count");
+			}
+			return count;
+
+		} catch (SQLException error) {
+			error.printStackTrace();
+			return count;
+		}
+
 	}
 
 }

@@ -55,11 +55,11 @@ public class VehicleDao {
 		}
 	}
 
-	public Vehicle findById(long id) throws DaoException {
+	public Vehicle findById(int id) throws DaoException {
 		try {
 			Connection connexion = ConnectionManager.getConnection();
 			PreparedStatement preparedStatement = connexion.prepareStatement(FIND_VEHICLE_QUERY);
-			preparedStatement.setLong(1, id);
+			preparedStatement.setInt(1, id);
 			preparedStatement.execute();
 			ResultSet result = preparedStatement.getResultSet();
 			if (result.next()) {

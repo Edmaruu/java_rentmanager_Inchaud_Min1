@@ -248,7 +248,7 @@ public class cli {
                         System.out.println("Cela n'est pas un identifiant valide !");
                         identifiant = scanner.nextLine();
                     }
-                    long id = Long.parseLong(identifiant);
+                    int id = Integer.parseInt(identifiant);
                     Client monClient = clientService.findById(id);
                     long result = 0;
                     try {
@@ -269,7 +269,7 @@ public class cli {
                         System.out.println("Cela n'est pas un identifiant valide !");
                         identifiant = scanner.nextLine();
                     }
-                    long id = Long.parseLong(identifiant);
+                    int id = Integer.parseInt(identifiant);
                     Vehicle monVehicule = vehicleService.findById(id);
                     long result = 0;
                     try {

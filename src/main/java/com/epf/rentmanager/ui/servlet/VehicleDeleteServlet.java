@@ -33,8 +33,8 @@ public class VehicleDeleteServlet extends HttpServlet{
         // traitement du formulaire (appel à la méthode de sauvegarde)
         try {
 
-            System.out.println(Long.parseLong(request.getParameter("id")));
-            Vehicle vehicle = vehicleService.findById(Long.parseLong(request.getParameter("id")));
+
+            Vehicle vehicle = vehicleService.findById(Integer.parseInt(request.getParameter("id")));
 
 
             vehicleService.delete(vehicle);

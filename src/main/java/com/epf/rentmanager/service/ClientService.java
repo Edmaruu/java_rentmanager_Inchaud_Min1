@@ -31,7 +31,7 @@ public class ClientService {
 		}
     }
 
-	public Client findById(long id) throws ServiceException {
+	public Client findById(int id) throws ServiceException {
 		// TODO: récupérer un client par son id
 		try {
 			return clientDao.findById(id);
@@ -56,6 +56,14 @@ public class ClientService {
 			throw new ServiceException("Erreur lors de la création ou de la mise à jour du client.", e);
 		}
 
+	}
+
+	public int count() throws ServiceException {
+		try {
+			return clientDao.count();
+		} catch (DaoException e) {
+			throw new ServiceException("Erreur lors de la création ou de la mise à jour du client.", e);
+		}
 	}
 	
 }
