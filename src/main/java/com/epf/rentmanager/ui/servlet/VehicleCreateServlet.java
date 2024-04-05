@@ -4,6 +4,8 @@ package com.epf.rentmanager.ui.servlet;
 import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.VehicleService;
 import com.epf.rentmanager.dao.VehicleDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,6 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/cars/create")
 public class VehicleCreateServlet extends HttpServlet{
+
+    @Autowired
+    VehicleService vehicleService;
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+    }
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse
@@ -42,7 +52,7 @@ public class VehicleCreateServlet extends HttpServlet{
 
             Vehicle vehicle = new Vehicle(1,constructeur, modele, nb_places);
 
-            VehicleService.getInstance().create(vehicle);
+            vehicleService.create(vehicle);
 
             // Succès de l'insertion
             response.sendRedirect(request.getContextPath()+"/cars");

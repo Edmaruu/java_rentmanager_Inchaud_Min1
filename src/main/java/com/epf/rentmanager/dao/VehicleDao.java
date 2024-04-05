@@ -7,17 +7,13 @@ import java.util.List;
 import com.epf.rentmanager.exception.DaoException;
 import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.persistence.ConnectionManager;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class VehicleDao {
-	
-	private static VehicleDao instance = null;
+
 	private VehicleDao() {}
-	public static VehicleDao getInstance() {
-		if(instance == null) {
-			instance = new VehicleDao();
-		}
-		return instance;
-	}
+
 	
 	private static final String CREATE_VEHICLE_QUERY = "INSERT INTO VEHICLE(constructeur, modele, nb_places) VALUES(?, ?, ?);";
 
