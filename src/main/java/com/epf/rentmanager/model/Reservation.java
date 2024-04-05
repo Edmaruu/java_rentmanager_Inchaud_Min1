@@ -22,11 +22,11 @@ public class Reservation {
         return id;
     }
 
-    public int getClientId() {
+    public int getClient_id() {
         return client_id;
     }
 
-    public int getVehicleId() {
+    public int getVehicle_id() {
         return vehicle_id;
     }
 
@@ -43,11 +43,11 @@ public class Reservation {
         this.id = id;
     }
 
-    public void setClientId(int client_id) {
+    public void setClient_id(int client_id) {
         this.client_id = client_id;
     }
 
-    public void setVehicleId(int vehicle_id) {
+    public void setVehicle_id(int vehicle_id) {
         this.vehicle_id = vehicle_id;
     }
 

@@ -289,7 +289,7 @@ public class cli {
                         System.out.println("Cela n'est pas un identifiant valide !");
                         identifiant = scanner.nextLine();
                     }
-                    long id = Long.parseLong(identifiant);
+                    int id = Integer.parseInt(identifiant);
                     Reservation maResa = reservationService.findById(id);
                     long result = 0;
                     try {
@@ -352,7 +352,7 @@ public class cli {
                             System.out.println("Cela n'est pas un identifiant valide !");
                             identifiant = scanner.nextLine();
                         }
-                        long id = Long.parseLong(identifiant);
+                        int id = Integer.parseInt(identifiant);
                         List<Reservation> resas;
                         try {
                             resas = reservationService.findByClientId(id);
@@ -369,7 +369,7 @@ public class cli {
                             System.out.println("Cela n'est pas un identifiant valide !");
                             identifiant = scanner.nextLine();
                         }
-                        long id = Long.parseLong(identifiant);
+                        int id = Integer.parseInt(identifiant);
                         List<Reservation> resas;
                         try {
                             resas = reservationService.findByVehicleId(id);

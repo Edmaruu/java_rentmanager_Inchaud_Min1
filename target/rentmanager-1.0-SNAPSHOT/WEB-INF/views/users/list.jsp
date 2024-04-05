@@ -48,7 +48,7 @@
                                         <a class="btn btn-success disabled" href="#">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <a type="submit" class="btn btn-danger disabled" href="del?id=${client.id}">
+                                        <a type="submit" class="btn btn-danger" href="dele?id=${client.id}">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </td>
