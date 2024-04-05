@@ -1,5 +1,6 @@
 com\epf\rentmanager\AppConfiguration.class
 com\epf\rentmanager\ui\servlet\VehicleCreateServlet.class
+com\epf\rentmanager\ui\servlet\VehicleDeleteServlet.class
 com\epf\rentmanager\model\Reservation.class
 com\epf\rentmanager\ui\cli\cli.class
 com\epf\rentmanager\WebConfiguration.class

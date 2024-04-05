@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/cars/create")
-public class VehicleCreateServlet extends HttpServlet{
+@WebServlet("/del")
+public class VehicleDeleteServlet extends HttpServlet{
 
     @Autowired
     VehicleService vehicleService;
@@ -30,29 +30,14 @@ public class VehicleCreateServlet extends HttpServlet{
 
     protected void doGet(HttpServletRequest request, HttpServletResponse
             response) throws ServletException, IOException {
-            // affichage du formulaire
-        try {
-            // Rediriger vers la JSP pour afficher les données
-            request.getRequestDispatcher("/WEB-INF/views/vehicles/create.jsp").forward(request, response);
-        } catch (Exception e) {
-            // Gérer les erreurs
-            e.printStackTrace(); // Vous pouvez remplacer ceci par un message d'erreur plus approprié
-        }
-
-    }
-    protected void doPost(HttpServletRequest request, HttpServletResponse
-            response) throws ServletException, IOException {
-            // traitement du formulaire (appel à la méthode de sauvegarde)
+        // traitement du formulaire (appel à la méthode de sauvegarde)
         try {
 
-            String constructeur = request.getParameter("manufacturer");
-            String modele = request.getParameter("modele");
-            int nb_places = Integer.parseInt(request.getParameter("seats"));
-            // Création de l'objet Vehicle
-            int countvoiture = vehicleService.count();
-            Vehicle vehicle = new Vehicle(countvoiture,constructeur, modele, nb_places);
+            System.out.println(Long.parseLong(request.getParameter("id")));
+            Vehicle vehicle = vehicleService.findById(Long.parseLong(request.getParameter("id")));
 
-            vehicleService.create(vehicle);
+
+            vehicleService.delete(vehicle);
 
             // Succès de l'insertion
             response.sendRedirect(request.getContextPath()+"/cars");

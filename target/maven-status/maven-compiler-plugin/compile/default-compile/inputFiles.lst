@@ -1,8 +1,10 @@
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\exception\DaoException.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\persistence\ConnectionManager.java
+C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlet\VehicleDeleteServlet.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\dao\ClientDao.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlet\VehicleListServlet.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\persistence\FillDatabase.java
+C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\WebConfiguration.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\service\VehicleService.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\utils\IOUtils.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\model\Client.java
@@ -13,6 +15,7 @@ C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\dao\ReservationDao.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlet\HomeServlet.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlet\VehicleCreateServlet.java
+C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\AppConfiguration.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\exception\ServiceException.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\dao\VehicleDao.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\cli\cli.java
