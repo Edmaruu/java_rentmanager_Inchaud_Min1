@@ -14,7 +14,7 @@ public class VehicleService {
 
 	private VehicleDao vehicleDao;
 
-	private VehicleService(VehicleDao vehicleDao){
+	public VehicleService(VehicleDao vehicleDao){
 		this.vehicleDao = vehicleDao;
 	}
 	
@@ -22,7 +22,7 @@ public class VehicleService {
 	
 	
 	public long create(Vehicle vehicle) throws ServiceException {
-		// TODO: créer un véhicule
+
 		try {
 			return vehicleDao.create(vehicle);
 		} catch (DaoException e) {
@@ -41,16 +41,16 @@ public class VehicleService {
 
 
 	public Vehicle findById(int id) throws ServiceException {
-		// TODO: récupérer un véhicule par son id
+
 		try {
 			return vehicleDao.findById(id);
 		} catch (DaoException e) {
-			throw new ServiceException("Erreur lors de la création ou de la mise à jour du client.", e);
+			throw new ServiceException("Erreur lors de la récupération du client.", e);
 		}
 	}
 
 	public List<Vehicle> findAll() throws ServiceException {
-		// TODO: récupérer tous les clients
+
 		try {
 			return vehicleDao.findAll();
 		} catch (DaoException e) {
@@ -62,7 +62,7 @@ public class VehicleService {
 		try {
 			return vehicleDao.count();
 		} catch (DaoException e) {
-			throw new ServiceException("Erreur lors de la création ou de la mise à jour du client.", e);
+			throw new ServiceException("Erreur lors du recensement du nombre de client.", e);
 		}
 	}
 	
