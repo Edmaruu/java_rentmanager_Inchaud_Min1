@@ -20,15 +20,13 @@
                     <!-- Profile Image -->
                     <div class="box box-primary">
                         <div class="box-body box-profile">
-                            <h3 class="profile-username text-center">John Doe (john.doe@epf.fr)</h3>
+                            <h3 class="profile-username text-center">${client.nom} ${client.prenom} ${client.email}</h3>
 
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <b>Reservation(s)</b> <a class="pull-right">2</a>
+                                    <b>Reservation(s)</b> <a class="pull-right">${countRes}</a>
                                 </li>
-                                <li class="list-group-item">
-                                    <b>Voiture(s)</b> <a class="pull-right">3</a>
-                                </li>
+
                             </ul>
                         </div>
                         <!-- /.box-body -->
@@ -40,7 +38,7 @@
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#rents" data-toggle="tab">Reservations</a></li>
-                            <li><a href="#cars" data-toggle="tab">Voitures</a></li>
+                            
                         </ul>
                         <div class="tab-content">
                             <div class="active tab-pane" id="rents">
@@ -53,52 +51,23 @@
                                             <th>Date de fin</th>
                                         </tr>
                                         <tr>
-                                            <td>3.</td>
-                                            <td>Renault Megane</td>
-                                            <td>10/01/2018</td>
-                                            <td>12/01/2018</td>
+<c:forEach items="${reservations}" var="reservation">
+    <td>${reservation.id}.</td>
+    <c:forEach items="${vehicles}" var="vehicle">
+        <c:if test="${vehicle.id == reservation.vehicle_id}">
+            <td>${vehicle.constructeur} ${vehicle.modele}</td>
+        </c:if>
+    </c:forEach>
+    <td>${reservation.debut}</td>
+    <td>${reservation.fin}</td>
+</c:forEach>
                                         </tr>
-                                        <tr>
-                                            <td>7.</td>
-                                            <td>Peugeot 207</td>
-                                            <td>10/01/2018</td>
-                                            <td>12/01/2018</td>
-                                        </tr>
+
                                     </table>
                                 </div>
                             </div>
                             <!-- /.tab-pane -->
-                            <div class="tab-pane" id="cars">
-                                <!-- /.box-header -->
-                                <div class="box-body no-padding">
-                                    <table class="table table-striped">
-                                        <tr>
-                                            <th style="width: 10px">#</th>
-                                            <th>Modele</th>
-                                            <th>Constructeur</th>
-                                            <th style=>Nombre de places</th>
-                                        </tr>
-                                        <tr>
-                                            <td>1.</td>
-                                            <td>Renault</td>
-                                            <td>Clio</td>
-                                            <td>5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2.</td>
-                                            <td>Peugeot</td>
-                                            <td>206</td>
-                                            <td>5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3.</td>
-                                            <td>Volkswagen</td>
-                                            <td>Touran</td>
-                                            <td>7</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
+
                             <!-- /.tab-pane -->
                         </div>
                         <!-- /.tab-content -->

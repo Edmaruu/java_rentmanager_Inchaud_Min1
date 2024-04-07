@@ -21,6 +21,7 @@ C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\service\ClientService.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlet\ClientListServlet.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\service\ReservationService.java
+C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlet\ClientDetailsServlet.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlet\ReservationCreateServlet.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlet\ClientDeleteServlet.java
 C:\Users\Incha\programmation\Java\rentmanager\rentmanager\src\main\java\com\epf\rentmanager\ui\servlet\VehicleCreateServlet.java
