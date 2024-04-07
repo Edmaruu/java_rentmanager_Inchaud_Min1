@@ -88,5 +88,31 @@
 <!-- ./wrapper -->
 
 <%@ include file="/WEB-INF/views/common/js_imports.jsp" %>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var form = document.querySelector("form");
+
+        form.addEventListener("submit", function(event) {
+            var manufacturer = document.getElementById("manufacturer").value.trim();
+            var modele = document.getElementById("modele").value.trim();
+            var seats = parseInt(document.getElementById("seats").value.trim());
+
+            // Vérifier si le modèle et le constructeur sont renseignés
+            if (manufacturer === "" || modele === "") {
+                alert("Veuillez saisir le constructeur et le modèle de la voiture.");
+                event.preventDefault(); // Empêcher la soumission du formulaire
+                return;
+            }
+
+            // Vérifier si le nombre de places est compris entre 2 et 9
+            if (isNaN(seats) || seats < 2 || seats > 9) {
+                alert("Le nombre de places doit être compris entre 2 et 9.");
+                event.preventDefault(); // Empêcher la soumission du formulaire
+                return;
+            }
+        });
+    });
+</script>
 </body>
 </html>

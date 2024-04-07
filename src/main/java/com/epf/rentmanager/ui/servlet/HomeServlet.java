@@ -52,7 +52,8 @@ public class HomeServlet extends HttpServlet {
 
 			request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
         } catch (ServiceException e) {
-            throw new RuntimeException(e);
+			e.printStackTrace(); // À adapter selon votre gestion d'erreurs
+
         }
 
 	}

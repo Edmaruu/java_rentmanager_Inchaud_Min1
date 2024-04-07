@@ -3,6 +3,7 @@
 <html>
 <%@include file="/WEB-INF/views/common/head.jsp"%>
 <body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
 
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -10,6 +11,8 @@
     <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
 
     <!-- Content Wrapper. Contains page content -->
+
+
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -27,6 +30,11 @@
                         <!-- form start -->
                         <form class="form-horizontal" method="post" >
                             <div class="box-body">
+
+                                <c:if test="${not empty message}">
+                                    <div class="alert alert-danger">${message}</div>
+                                </c:if>
+
                                 <div class="form-group">
                                     <label for="last_name" class="col-sm-2 control-label">Nom</label>
 
@@ -76,5 +84,42 @@
 <!-- ./wrapper -->
 
 <%@ include file="/WEB-INF/views/common/js_imports.jsp" %>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var form = document.querySelector("form");
+
+        form.addEventListener("submit", function(event) {
+            var lastName = document.getElementById("last_name").value.trim();
+            var firstName = document.getElementById("first_name").value.trim();
+            var naissance = document.getElementById("naissance").value.trim();
+
+            // Vérifier si le nom et le prénom font au moins 3 caractères
+            if (lastName.length < 3 || firstName.length < 3) {
+                alert("Le nom et le prénom doivent faire au moins 3 caractères.");
+                event.preventDefault(); // Empêcher la soumission du formulaire
+                return;
+            }
+
+            // Vérifier si l'utilisateur a au moins 18 ans
+            var birthDate = new Date(naissance);
+            var now = new Date();
+            var age = now.getFullYear() - birthDate.getFullYear();
+            var monthDiff = now.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            if (age < 18) {
+                alert("Vous devez avoir au moins 18 ans pour vous inscrire.");
+                event.preventDefault(); // Empêcher la soumission du formulaire
+                return;
+            }
+
+        });
+
+
+    });
+</script>
+
 </body>
 </html>

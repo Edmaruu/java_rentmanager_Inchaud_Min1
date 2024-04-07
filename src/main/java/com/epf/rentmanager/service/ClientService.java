@@ -40,6 +40,15 @@ public class ClientService {
 		}
 	}
 
+	public Client findByEmail(String email) throws ServiceException {
+		// TODO: récupérer un client par son id
+		try {
+			return clientDao.findByEmail(email);
+		} catch (DaoException e) {
+			throw new ServiceException("Erreur lors de la recherche du client.", e);
+		}
+	}
+
 	public long delete(Client client) throws ServiceException {
 			try {
 				return clientDao.delete(client);

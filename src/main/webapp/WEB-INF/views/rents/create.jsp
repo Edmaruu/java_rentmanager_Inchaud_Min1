@@ -27,13 +27,17 @@
                         <!-- form start -->
                         <form class="form-horizontal" method="post">
                             <div class="box-body">
+
+                                <c:if test="${not empty message}">
+                                    <div class="alert alert-danger">${message}</div>
+                                </c:if>
                                 <div class="form-group">
                                     <label for="car" class="col-sm-2 control-label">Voiture</label>
 
                                     <div class="col-sm-10">
                                         <select class="form-control" id="car" name="car">
                                             <c:forEach var="vehicle" items="${vehicles}">
-                                                <option value="${vehicle.id}">${vehicle.modele}</option>
+                                                <option value="${vehicle.id}">${vehicle.constructeur} ${vehicle.modele}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -44,7 +48,7 @@
                                     <div class="col-sm-10">
                                         <select class="form-control" id="client" name="client">
                                             <c:forEach var="client" items="${clients}">
-                                                <option value="${client.id}">${client.nom}</option>
+                                                <option value="${client.id}">${client.nom} ${client.prenom}</option>
                                             </c:forEach>
                                         </select>
                                     </div>

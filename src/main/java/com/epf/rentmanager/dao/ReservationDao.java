@@ -87,7 +87,7 @@ public class ReservationDao {
 			ArrayList<Reservation> listeRes = new ArrayList<>();
 			ResultSet result = preparedStatement.getResultSet();
 			while (result.next()) {
-				listeRes.add(new Reservation(result.getInt("id"), result.getInt("client_id"),
+				listeRes.add(new Reservation(result.getInt("id"), Math.toIntExact(client_id),
 						result.getInt("vehicle_id"), result.getDate("debut").toLocalDate(),
 						result.getDate("fin").toLocalDate()));
 			}

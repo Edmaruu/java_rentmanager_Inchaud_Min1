@@ -26,6 +26,7 @@ public class ClientDao {
 	private static final String FIND_CLIENT_QUERY = "SELECT id, nom, prenom, email, naissance FROM Client WHERE id=?;";
 	private static final String FIND_CLIENTS_QUERY = "SELECT id, nom, prenom, email, naissance FROM Client;";
 	private static final String COUNT_CLIENTS_QUERY = "SELECT COUNT(id) AS count FROM CLIENT;";
+	private static final String FIND_CLIENT_BY_EMAIL_QUERY = "SELECT id, nom, prenom, naissance FROM Client WHERE email=?;";
 	
 	public long create(Client client) throws DaoException {
 		try {
@@ -78,6 +79,27 @@ public class ClientDao {
 				return new Client(result.getInt("id"), result.getString("nom"), result.getString("prenom"), result.getString("email"), result.getDate("naissance").toLocalDate());
 			} else {
 				System.out.println("Aucun client ne possède cet identifiant !");
+				return null;
+			}
+		} catch (SQLException error) {
+			error.printStackTrace();
+			return null;
+		}
+
+	}
+
+	public Client findByEmail(String email) throws DaoException {
+
+		try {
+			Connection connexion = ConnectionManager.getConnection();
+			PreparedStatement preparedStatement = connexion.prepareStatement(FIND_CLIENT_BY_EMAIL_QUERY);
+			preparedStatement.setString(1, email);
+			preparedStatement.execute();
+			ResultSet result = preparedStatement.getResultSet();
+			if (result.next()) {
+				return new Client(result.getInt("id"), result.getString("nom"), result.getString("prenom"), email, result.getDate("naissance").toLocalDate());
+			} else {
+				System.out.println("Aucun client ne possède cet email !");
 				return null;
 			}
 		} catch (SQLException error) {

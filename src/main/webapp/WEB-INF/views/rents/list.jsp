@@ -38,10 +38,19 @@
 
                                     <c:forEach items="${reservations}" var="reservation">
                                     <td>${reservation.id}.</td>
-                                    <td>${reservation.vehicle_id}</td>
-                                    <td>${reservation.client_id}</td>
+                                        <c:forEach items="${vehicles}" var="vehicle">
+                                            <c:if test="${vehicle.id == reservation.vehicle_id}">
+                                                <td>${vehicle.constructeur} ${vehicle.modele}</td>
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:forEach items="${clients}" var="client">
+                                            <c:if test="${client.id == reservation.client_id}">
+                                                <td>${client.nom} ${client.prenom}</td>
+                                            </c:if>
+                                        </c:forEach>
                                     <td>${reservation.debut}</td>
                                     <td>${reservation.fin}</td>
+
                                     <!--<td>John Doe</td>-->
                                     <td>
                                         <a class="btn btn-primary disabled" href="car-detail.html">

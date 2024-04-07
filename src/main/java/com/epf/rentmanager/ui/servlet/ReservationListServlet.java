@@ -42,10 +42,14 @@ public class ReservationListServlet extends HttpServlet{
 
             // Récupérer la liste des véhicules depuis le service
             List<Reservation> reservations = reservationService.findAll();
+            List<Vehicle> vehicles = vehicleService.findAll();
+            List<Client> clients = clientService.findAll();
 
 
             // Définir l'attribut "vehicles" dans la requête pour passer la liste des véhicules à la JSP
             request.setAttribute("reservations", reservations);
+            request.setAttribute("vehicles", vehicles);
+            request.setAttribute("clients", clients);
 
             // Rediriger vers la JSP pour afficher les données
             request.getRequestDispatcher("/WEB-INF/views/rents/list.jsp").forward(request, response);

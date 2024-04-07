@@ -53,15 +53,27 @@ public class ClientCreateServlet extends HttpServlet{
             String email = request.getParameter("email");
             LocalDate naissance = LocalDate.parse(request.getParameter("naissance"));
 
+
+
             // Création de l'objet Vehicle
             int countClient = clientService.count();
 
             Client client = new Client(countClient, nom, prenom, email, naissance);
 
-            clientService.create(client);
+            Client existingClient = clientService.findByEmail(email);
 
-            // Succès de l'insertion
-            response.sendRedirect(request.getContextPath()+"/users");
+
+            if(existingClient != null && existingClient.getEmail().equals(client.getEmail())){
+                request.setAttribute("message", "Un client a déjà cet email dans notre base de données, veuillez changer d'email");
+                request.getRequestDispatcher("/WEB-INF/views/users/create.jsp").forward(request, response);
+            }else {
+                clientService.create(client);
+
+                // Succès de l'insertion
+                response.sendRedirect(request.getContextPath()+"/users");
+            }
+
+
 
         } catch (Exception e) {
             // Gestion des exceptions

@@ -1,7 +1,9 @@
 package com.epf.rentmanager.ui.servlet;
 
 
+import com.epf.rentmanager.model.Reservation;
 import com.epf.rentmanager.model.Vehicle;
+import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.VehicleService;
 import com.epf.rentmanager.dao.VehicleDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class VehicleDeleteServlet extends HttpServlet{
 
     @Autowired
     VehicleService vehicleService;
+    @Autowired
+    ReservationService reservationService;
     @Override
     public void init() throws ServletException {
         super.init();
@@ -35,6 +39,12 @@ public class VehicleDeleteServlet extends HttpServlet{
 
 
             Vehicle vehicle = vehicleService.findById(Integer.parseInt(request.getParameter("id")));
+
+            List<Reservation> reservations = reservationService.findByVehicleId(vehicle.getId());
+
+            for(Reservation reservation : reservations){
+                reservationService.delete(reservation);
+            }
 
 
             vehicleService.delete(vehicle);
